@@ -44,19 +44,26 @@ function App() {
         <button type="submit">Get Weather</button>
       </form>
       <div className="weatherDisplay">
-        {weatherData && weatherData.hourly && (
-          <div>
-            {weatherData.hourly.time.map((time, index) => {
-              return (
-                <div key={time}>
-                  Time: {new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}, 
-                  Temperature: {weatherData.hourly.temperature_2m[index]}°C, 
-                  Precipitation: {weatherData.hourly.precipitation[index]}mm
-                </div>
-              );
-            })}
-          </div>
-        )}
+      {weatherData && weatherData.hourly && (
+    <table className="weatherTable">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Temperature (°C)</th>
+          <th>Precipitation (mm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {weatherData.hourly.time.map((time, index) => (
+          <tr key={time}>
+            <td>{new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+            <td>{weatherData.hourly.temperature_2m[index]}°C</td>
+            <td>{weatherData.hourly.precipitation[index]}mm</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
       </div>
     </div>
   );
