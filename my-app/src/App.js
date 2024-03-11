@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -12,6 +12,15 @@ function App() {
     Houston: { lat: 29.7604, lon: -95.3698 },
     Austin: { lat: 30.2672, lon: -97.7431 },
   };
+
+  const losAngelesCoordinates = {
+    lat: 34.0522,
+    lon: -118.2437,
+  };
+
+  useEffect(() => {
+    fetchWeatherData(losAngelesCoordinates.lat, losAngelesCoordinates.lon);
+  }, []);
 
   const validateCoordinates = (lat, lon) => {
     const latNum = parseFloat(lat);
